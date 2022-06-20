@@ -1,0 +1,51 @@
+.header {
+    border-bottom: 2px solid #cccccc; 
+    display: flex;
+    padding: 0 24px;  
+    font-weight: bold;
+    margin: 16px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    padding: 0 24px;  
+}
+
+.col1 {
+    border-collapse: collapse;
+    width: 75%;
+    }
+    
+    th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+      
+}
+
+.col2 {
+    border-collapse: collapse;
+    width: 20%;
+    }
+    
+    th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+button {
+    background-color: white; 
+    color: black; 
+    border: none
+    
+}
+
+input {
+    background-color: white;
+    border-radius: 6px;
+    border: 2px solid #cccccc; 
+    width: 30px;
+    height: 30px;
+}
