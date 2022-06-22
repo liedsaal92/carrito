@@ -38,14 +38,16 @@
 button {
     background-color: white; 
     color: black; 
-    border: none
-    
+    width: 30px;
+    border: none;
+    font-size: 100%;   
 }
 
 input {
     background-color: white;
     border-radius: 6px;
     border: 2px solid #cccccc; 
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
 }

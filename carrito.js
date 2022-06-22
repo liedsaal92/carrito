@@ -1,4 +1,5 @@
 class Carrito {
+  productos = [];
     constructor(productos = []) {
       this.productos = productos;
 
