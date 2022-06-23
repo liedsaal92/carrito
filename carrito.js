@@ -27,7 +27,7 @@ class Carrito {
 
     obtenerCarrito() {
         return this.productos.reduce((acc, producto) => {
-            return acc += producto.price;
+        return acc += producto.price;
           }, 0);  
 
 

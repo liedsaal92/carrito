@@ -24,17 +24,18 @@ document.addEventListener('DOMContentLoaded',() => {
 
       const sumarButton = document.createElement('button');
       sumarButton.innerText = '+';
-      sumarButton.setAttribute('sumar-SKU', product.getSku());
+      sumarButton.setAttribute('sumar-sku', product.getSku());
       sumarButton.addEventListener('click', sumarButtonClickHandler);
+      
 
       const calcularButton = document.createElement('input');
-      calcularButton.setAttribute('calcular-SKU', product.getSku());
       calcularButton.setAttribute('disabled', '');
       calcularButton.setAttribute('value', 0);
+      calcularButton.setAttribute('id', product.getSku ());
 
       const restarButton = document.createElement('button');
       restarButton.innerText = '-';
-      restarButton.setAttribute('restar-SKU', product.getSku());
+      restarButton.setAttribute('restar-sku', product.getSku());
       restarButton.addEventListener('click', restarButtonClickHandler);
 
       const tr = document.createElement('tr');
@@ -70,31 +71,24 @@ document.addEventListener('DOMContentLoaded',() => {
     });
   };
 
-  const sumarButtonClickHandler = (event) => {
-    console.log(document.getElementsByClassName('calcular-SKU'))
-    const calcularSku = document.getElementsByClassName('calcular-SKU');
-    let acc = Number (calcularSku.innerText);
-    InputEvent.innerText = acc + 1
-  };
+    const sumarButtonClickHandler = (event) => {       
+        const sumarSku = event.target.getAttribute('sumar-sku');
+        const calcularSku = document.getElementById(sumarSku);
+        let acc = Number(calcularSku.value);
+        calcularSku.value = acc + 1;
+        //actualizar total
+           
+
+
+    };
   
-  
+    const restarButtonClickHandler = (event) => {
+        const restarSku = event.target.getAttribute('restar-sku');
+        const calcularSku = document.getElementById(restarSku);
+        let acc = Number(calcularSku.value);
+        if (acc > 0) {
+            calcularSku.value = acc - 1;
+        } 
+    };
 
-
-
-
-
-
-  const calcularButtonClickHandler = (event) => {
-    const sku = event.target.getAttribute('element-SKU');
-    console.log("ey", event.target);
-    carrito.calcularProducto(sku);
-    pintarCarrito (); 
-  };
-
-  const restarButtonClickHandler = (event) => {
-    const sku = event.target.getAttribute('element-SKU');
-    console.log("ey", event.target);
-    carrito.restarProducto(sku);
-    pintarCarrito (); 
-  };
 });
