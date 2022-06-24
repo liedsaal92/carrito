@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded',() => {
   .then(response => response.json())
   .then(data => {
     guardarProducto(data);
-    pintarCarrito(data.currency,objetoCarrito.obtenerProductos());
+    pintarCarrito(data.currency, objetoCarrito.obtenerProductos());
   });
   //guarda productos
   const guardarProducto = (data) => {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded',() => {
   };
   console.log(objetoCarrito.obtenerProductos());
   //pinta carrito
-  const pintarCarrito = (currency,listaProductos) => {
+  const pintarCarrito = (currency, listaProductos) => {  
     const carritoEl = document.querySelector('#contenido');
     carritoEl.innerHTML = "";
     console.log(listaProductos);
@@ -25,17 +25,18 @@ document.addEventListener('DOMContentLoaded',() => {
       const sumarButton = document.createElement('button');
       sumarButton.innerText = '+';
       sumarButton.setAttribute('sumar-sku', product.getSku());
+      sumarButton.setAttribute('sumar-precio', product.getPrice());
       sumarButton.addEventListener('click', sumarButtonClickHandler);
       
-
-      const calcularButton = document.createElement('input');
-      calcularButton.setAttribute('disabled', '');
-      calcularButton.setAttribute('value', 0);
-      calcularButton.setAttribute('id', product.getSku ());
+      const calcularInput = document.createElement('input');
+      calcularInput.setAttribute('disabled', '');
+      calcularInput.setAttribute('value', 0);
+      calcularInput.setAttribute('id', product.getSku ());
 
       const restarButton = document.createElement('button');
       restarButton.innerText = '-';
       restarButton.setAttribute('restar-sku', product.getSku());
+      restarButton.setAttribute('restar-precio', product.getPrice());
       restarButton.addEventListener('click', restarButtonClickHandler);
 
       const tr = document.createElement('tr');
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
       const tdcantidad = document.createElement ('td');
       tdcantidad.appendChild(restarButton);
-      tdcantidad.appendChild(calcularButton);
+      tdcantidad.appendChild(calcularInput);
       tdcantidad.appendChild(sumarButton);
 
       const tdprice = document.createElement ('td');
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded',() => {
       const curre = document.createElement ('p');
       curre.innerHTML= `0${currency}`;
       tdcurrency.appendChild(curre);
+      curre.setAttribute('id', "td_" + product.getSku ());
 
       tr.innerHTML = content;
 
@@ -71,24 +73,29 @@ document.addEventListener('DOMContentLoaded',() => {
     });
   };
 
-    const sumarButtonClickHandler = (event) => {       
-        const sumarSku = event.target.getAttribute('sumar-sku');
-        const calcularSku = document.getElementById(sumarSku);
-        let acc = Number(calcularSku.value);
-        calcularSku.value = acc + 1;
-        //actualizar total
-           
-
-
-    };
+  const sumarButtonClickHandler = (event) => {       
+    const codigoSku = event.target.getAttribute('sumar-sku');
+    const inputSku = document.getElementById(codigoSku);
+    let acc = Number(inputSku.value);
+    inputSku.value = acc + 1;
+    //actualizar total
+    const calcularTotal = document.getElementById ("td_"+codigoSku);
+    const calcularPrecio = event.target.getAttribute('sumar-precio');
+    console.log(calcularTotal, calcularPrecio);
+    calcularTotal.innerHTML = calcularPrecio*(inputSku.value);      
+  };
   
-    const restarButtonClickHandler = (event) => {
-        const restarSku = event.target.getAttribute('restar-sku');
-        const calcularSku = document.getElementById(restarSku);
-        let acc = Number(calcularSku.value);
-        if (acc > 0) {
-            calcularSku.value = acc - 1;
-        } 
-    };
+  const restarButtonClickHandler = (event) => {
+    const restarSku = event.target.getAttribute('restar-sku');
+    const calcularSku = document.getElementById(restarSku);
+    let acc = Number(calcularSku.value);
+    if (acc > 0) {
+      calcularSku.value = acc - 1; 
+    } 
+    const calcularTotal = document.getElementById ("td_"+restarSku);
+    const calcularPrecio = event.target.getAttribute('restar-precio');
+    console.log(calcularTotal, calcularPrecio);
+    calcularTotal.innerHTML = calcularPrecio*(calcularSku.value);
+  };
 
 });
