@@ -102,4 +102,5 @@ document.addEventListener('DOMContentLoaded',() => {
     calcularTotal.innerHTML = calcularPrecio*(calcularSku.value);
   };
 
+  
 });
