@@ -12,17 +12,22 @@ class Carrito {
     }
 
     actualizarUnidades(sku, unidades) {
-      // Actualiza el número de unidades que se quieren comprar de un producto
-      
+      this.productos.filter(producto=>{
+          if  (producto.getSku()===sku)
+          {
+            return producto.quantity=unidades;
+          }
+      });
     }
 
     obtenerInformacionProducto(sku) {
-      // Devuelve los datos de un producto además de las unidades seleccionadas
-      // Por ejemplo
-      // {
-      //   "sku": "0K3QOSOV4V",
-      //   "quantity": 3
-      // } 
+      const informacionProducto=this.productos.filter(producto => {
+        if  (producto.getSku()===sku)
+        {
+          return producto;
+        }
+      });
+      return informacionProducto; 
     }
 
     obtenerCarrito() {
